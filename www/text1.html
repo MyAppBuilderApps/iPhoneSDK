@@ -1,0 +1,178 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="themes/flatapp.css" />
+            <link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.2.css" />
+        <title>Hello World</title>
+    <script type="text/javascript" src="jquery.mobile/jquery-1.9.1.js"></script>
+      <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.3.2.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/activity.css"/>
+            <script type="text/javascript" src="js/activity-indicator.js"></script>
+            <script type="text/javascript" src="js/video.js"></script>
+            <script type="text/javascript" src="js/audio.js"></script>
+			<script type="text/javascript">
+                $(document).ready(function() {
+                                  //localStorage.k = parseInt(localStorage.k)+1;
+                                  // alert(localStorage.page);
+                                  $('.bg').css('background-image','url(' + localStorage.bgpath + ')');
+                                  
+                              $('.hd').css('background-image','url(' + localStorage.hbg + ')');
+                              $('.hd').css('background-size','100%','100%');
+                              $('.hd').css('background-repeat','repeat-x');
+                              $('.hd').css('height','55px') ;
+                              $('.hd').css('text-align','center');
+                              $('.hd').css('color','#51C4D4');
+                                  
+                                  $('.img').css('width','100%');
+                                  
+                                  
+                                  
+                                  $('#info').append('<img src='+localStorage.info+' style="height: 25px; width: 25px; margin-left:90%; margin-top: -38px; margin-bottom: 30px"/>');
+                                   $('#back').append('<img src='+localStorage.bk+' style="height: 35px; width: 55px; margin-right: 85%; margin-top: -50px; margin-bottom: 50px"/>');
+                                  
+                                  
+                                  $('#info img').click(function(){
+                                                       window.location.href="index.html#contentPage";
+                                                       });
+                                  
+                                  $('#back img').click(function(){
+                                                       window.history.back()
+                                                       });
+                                  if(localStorage.Price1=="null"){
+                                  $("#text").html('<div>'+localStorage.Text1+'</div>');
+                                  }
+                                  else if(localStorage.Price1== undefined){
+                                  $("#text").html('<div>'+localStorage.Text1+'</div>');
+                                  }
+                                  else{
+                                  $("#text").html('<div>'+localStorage.Text1+'<div><b>Price:'+localStorage.Price1+'</b></div></div>');
+                                  }
+                                  
+                                  //$("#text").content("refresh");
+                                  
+                                  if(localStorage.page==1){
+                                  $('#next').hide();
+                                  $('#pre').hide();
+                                  }
+                                  else{
+                                  if(localStorage.k==0){
+                                  $('#pre').hide();
+                                  $('#next').css('margin-left','65%');
+                                  
+                                  }
+                                  else{
+                                  $('#pre').show();
+                                  }
+                                  
+                                  if(localStorage.k==localStorage.page-1){
+                                  $('#next').hide();
+                                  
+                                  }
+                                  else{
+                                  $('#next').show();
+                                  }
+                                  }
+                                  
+                                  
+                                  
+                                  $('#next').click(function(){
+                                                   localStorage.k = parseInt(localStorage.k)+1;
+                                                   var k = localStorage.k
+                                                   //alert(k);
+                                                   var content = $.ajax({
+                                                                        
+                                                                        url: localStorage.path,
+                                                                        async: false
+                                                                        }).responseText;
+                                                   var result = $.parseJSON(content);
+                                                   localStorage.Title1=result.buttons[localStorage.btpos].elements[k].title;
+                                                   localStorage.Text1=result.buttons[localStorage.btpos].elements[k].text;
+                                                   localStorage.Price1=result.buttons[localStorage.btpos].elements[k].price;
+                                                   window.location.href="text1.html";
+                                                   });
+                                  
+                                  $('#pre').click(function(){
+                                                  localStorage.k = parseInt(localStorage.k)-1;
+                                                  var k = localStorage.k
+                                                  //alert(k);
+                                                  var content = $.ajax({
+                                                                       
+                                                                       url: localStorage.path,
+                                                                       async: false
+                                                                       }).responseText;
+                                                  var result = $.parseJSON(content);
+                                                  localStorage.Title1=result.buttons[localStorage.btpos].elements[k].title;
+                                                  localStorage.Text1=result.buttons[localStorage.btpos].elements[k].text;
+                                                  localStorage.Price1=result.buttons[localStorage.btpos].elements[k].price;
+                                                  window.location.href="text1.html";
+                                                  });
+                                  
+                                  $('video').click(function(){
+                                 window.plugins.videoPlayer.play(this.src);
+                                 });
+                                  
+                                  
+                                  $('audio').click(function(){
+                                 window.plugins.audioPlayer.play(this.src);
+                                 });
+                                  
+                                  
+                                  });
+                
+                </script>
+            <style>
+                img{
+                    width: 100%;
+                }
+                ul{
+                    width: 100%;
+                    padding:0;
+                }
+                div{
+                    font-family: Helvetica,Arial,sans-serif;
+                    font-weight: normal;
+                    font-stretch: ultra-expanded;
+                    text-shadow:none;
+                }
+                h2{
+                    text-shadow:none;
+                }
+                p {text-transform:none;
+                    font-size: 20px;
+                    text-shadow:none;}
+                video{
+                
+                }
+                </style>
+            
+            
+            </head>
+    <body>
+        
+        <div data-role="page" id="textPage" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            <div data-role="header-fixed" id="back" data-theme="a" class="hd" style="position:fixed; width:100%; z-index:999">
+                <h4><script>document.write(localStorage.head);</script></h4>
+                <div></div>
+                
+            </div>
+            <br>
+            
+           
+            <div data-role="content">
+                <h2 style="text-align:center;">
+                    <script>document.write(localStorage.Title1);</script>
+                </h2>
+                <div id="text" style="width:100%"></div>
+            </div>
+            <a data-role="button" data-inline="true" data-icon="arrow-l" data-theme="" id="pre">PREVIOUS<a/>
+                <a data-role="button" data-inline="true" data-icon="arrow-r"  data-iconpos="right" data-theme="" id="next" style="margin-left:15%;">NEXT<a/>
+                    
+                    
+                    </div>
+        
+    </body>
+</html>                          

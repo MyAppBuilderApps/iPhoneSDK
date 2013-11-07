@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.css" type="text/css">
+        <title>Hello World</title>
+    <script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
+      <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.3.2.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/activity.css"/>
+        <script type="text/javascript" src="js/activity-indicator.js"></script>
+        <script src="js/validatef.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/inline.css" />
+		
+		<script type="text/javascript"> 
+		function Check(val){
+		
+		localStorage.appkey1 = val;
+                               localStorage.appkey1 = document.getElementById("appkey").value.toLowerCase();
+                                                 $('#login').activity({segments: 8, width: 5, space: 12, length:15, color: 'black', speed: 2});
+                                                 
+                                                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {   
+                                                                          var url = "http://build.myappbuilder.com/api/apps/"+localStorage.appkey1;
+                                                                          var Path;
+                                                                          var a = "/Data.json";
+                                                                          Path = fs.root.fullPath +a;
+                                                                          var fileTransfer = new FileTransfer();
+                                                                          fileTransfer.download(url, Path, function (entry) {
+     $('#login').activity({segments: 8, width: 5, space: 12, length:15, color: 'black', speed: 2});
+                                                                                                localStorage.path=entry.fullPath;
+                                                                                                var contentText = $.ajax({
+                                                                                                                         
+                                                                                                                         url: localStorage.path,
+                                                                                                                         
+                                                                                                                         async: false
+                                                                                                                         
+                                                                                                                         }).responseText;
+                                                                                                
+                                                                                                
+                                                                                                var results = $.parseJSON(contentText);
+                                                                                                
+                                                                                                localStorage.head = results.title;
+                                                                                                
+                                                                                                localStorage.author = results.author;
+                                                                                                
+                                                                                                localStorage.about_author = results.about_author;
+                                                                                                
+                                                                                                localStorage.description = results.description;
+                                                                                                
+                                                                                                localStorage.copyright = results.copyright;
+                                                                                                
+                                                                                                localStorage.price = results.price;
+                                                                                                
+                                                                                                localStorage.bg = results.portrait_background;
+                                                                                                
+                                                                                                localStorage.update = results.updated_at;
+                                                                                                
+                                                                                                
+                                                                                                window.location.href="icons.html";
+                                                                                                
+                                                                                                }, function (error) {
+                                                                                    console.log("Some error");
+                                                                                     localStorage.clear();
+                                                                                     navigator.notification.alert("Invalid Key");
+                                                                                    
+                                                                                                });
+                                                                          
+                                                                          })
+                                                 }
+												 
+					 
+	
+		
+	 </script>	
+<style>
+    label {text-transform:none;
+        font-size: 20px;
+        text-shadow:none;}
+    </style>
+
+        
+       
+    </head>
+    <body>
+    
+    
+    <div data-role="page" id="home" data-theme="b" style="background-image:url('img/theme3/bg.png'); background-size:100% 100%; background-repeat:repeat-x;">
+           <br>
+      <script type="text/javascript">
+            $(document).ready(function() {
+               //$('#login').activity({segments: 8, width: 5, space: 12, length:15, color: 'black', speed: 2});              
+                               //alert(localStorage.appkey1);
+                              if(localStorage.appkey1== undefined){
+//                              window.location.href="#login";
+//                             }
+//                             else if(localStorage.appkey1== 0){
+//                             window.location.href="#login";
+                             
+                              var content = $.ajax({
+                                                       
+                                                       url: "key.txt",
+                                                       
+                                                       async: false
+                                                       
+                                                       }).responseText;
+                              
+                              
+                              var result = $.parseJSON(content);
+                              localStorage.appkey1=result.api_key;
+                              //alert(localStorage.appkey1);
+                              window.location.href="check.html";
+                             }
+                              else{
+							 
+                              window.location.href="check.html";
+                              }
+                              
+                              });
+            </script>
+        </div>
+        
+        <div data-role="page" id="login" data-theme="b" style="background-image:url('img/theme3/bg.png'); background-size:100% 100%; background-repeat:repeat-x;">
+           <br>
+            <br>
+            <br>
+
+            <form  action="javascript:generalsearchgo();" method="post" id="GenaralSearch">
+                
+                <table border="0" cellspacing="5" width="100%">
+                    
+                <tr>
+                    <td style="text-align:left">
+                        <label>APPKEY</label>
+                    </td>
+                        <td style="text-align:right" >
+                        <input type="text" id="appkey" name="appkey" placeholder= "APPKEY" >
+                            </td>
+                </tr>
+                
+
+                </table>
+                <input type="submit" id="submit" value="Submit"/>
+            </form>
+            
+                
+                <script type="text/javascript">
+            
+                     function generalsearchgo(){                                     
+                     var a = document.getElementById("appkey").value.toLowerCase();
+                                                 //alert(a);
+                                                 localStorage.appkey1 = a;
+                                                
+                                                 //alert(localStorage.appkey1);
+                                                 if(localStorage.appkey1==""){
+                                                 localStorage.appkey1= 0;
+                                                 navigator.notification.alert("Enter Key");
+                                                 }
+                                                else if(localStorage.appkey1== undefined){
+                                                 navigator.notification.alert("Undefined Key");
+                                                 }
+                                                 else{
+                                                Check(localStorage.appkey1);
+                                                 }
+                             }
+            
+			            
+            </script>	
+            </div>
+       
+        
+      
+       
+                                    </body>
+    
+
+</html>

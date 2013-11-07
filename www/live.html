@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>InAppBrowser.removeEventListener Example</title>
+        
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        
+               
+        <script type="text/javascript" charset="utf-8">
+                                          
+                              
+                              
+                              
+                              
+                              
+                              document.addEventListener("deviceready", onDeviceReady, false);
+                              
+                             
+                              var iabRef = null;
+                              
+            function iabLoadStart(event) {
+                //alert(event.type + ' - ' + event.url);
+            }
+            
+            function iabLoadStop(event) {
+               // alert(event.type + ' - ' + event.url);
+            }
+            
+            function iabLoadError(event) {
+                //alert(event.type + ' - ' + event.message);
+            }
+            
+            
+                              function iabClose(event) {
+                              window.history.go(-2)
+                                  // alert(event.type);
+                              //iabRef.removeEventListener('loadstart', iabLoadStart);
+                              //iabRef.removeEventListener('loadstop', iabLoadStop);
+                              //iabRef.removeEventListener('loaderror', iabLoadError);
+                              //iabRef.removeEventListener('exit', iabClose);
+                              }
+                              
+                           
+                              function onDeviceReady() {
+                              iabRef = window.open(localStorage.url, '_blank', 'location=yes');
+                              iabRef.addEventListener('loadstart', iabLoadStart);
+                              iabRef.addEventListener('loadstop', iabLoadStop);
+                              iabRef.removeEventListener('loaderror', iabLoadError);
+                              iabRef.addEventListener('exit', iabClose);
+                              
+                              }
+                              
+                           
+            
+            </script>
+        
+        
+    </head>
+    <body>
+        
+    </body>
+</html>

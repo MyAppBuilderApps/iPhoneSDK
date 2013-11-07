@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+           <link rel="stylesheet" href="themes/flatapp.css" />
+           <link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.2.css" />
+        <title>Hello World</title>
+    <script type="text/javascript" src="jquery.mobile/jquery-1.9.1.js"></script>
+      <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.3.2.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+       <script src="js/EmailComposer.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/activity.css"/>
+        <script type="text/javascript" src="js/activity-indicator.js"></script>
+        
+        
+        <script type="text/javascript">
+            $(document).ready(function() {
+                              
+                              $('.bg').css('background-image','url(' + localStorage.bgpath + ')');
+                              
+                              $('.hd').css('background-image','url(' + localStorage.hbg + ')');
+                              $('.hd').css('background-size','100%','100%');
+                              $('.hd').css('background-repeat','repeat-x');
+                              $('.hd').css('height','55px') ;
+                              $('.hd').css('text-align','center');
+                              $('.hd').css('color','#51C4D4');
+                              
+                              
+                         
+                              $('#info').append('<img src='+localStorage.info+' style="height: 25px; width: 25px; margin-left:90%; margin-top: -38px; margin-bottom: 30px"/>');
+                               $('#back').append('<img src='+localStorage.bk+' style="height: 35px; width: 55px; margin-right: 85%; margin-top: -50px; margin-bottom: 50px"/>');
+                              
+                              
+                              $('#info img').click(function(){
+                                                   window.location.href="index.html#contentPage";
+                                                   });
+                              
+                              $('#back img').click(function(){
+                                                   window.location.href="home.html";
+                                                   });
+                              
+                              
+                              
+                              });
+            
+            </script>
+          <style>
+              img{
+                  width: 100%;
+              }
+              div{
+                  font-family: Helvetica,Arial,sans-serif;
+                  font-weight: normal;
+                  font-stretch: ultra-expanded;
+                  text-shadow:none;
+              }
+              h2{
+                  text-shadow:none;
+              }
+              p {text-transform:none;
+                  font-size: 20px;}
+              </style>
+        
+            </head>
+    <body>
+        
+        
+        <div data-role="page" id="textPage" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:1000">
+                <h4><script>document.write(localStorage.head);</script></h4>
+                <div id="back"></div>
+                
+            </div>
+            <br>
+            <br>
+            <br>
+           
+
+            <h2 style="text-align:center;"><script>document.write(localStorage.Title);</script></h2>
+            
+            <div data-role="content">
+                
+                <div><input type="text" id="sub" placeholder="Subject"></div>
+                <br>
+                <div><textarea type="text" id="bod" placeholder="message to suggest you" style="height:200px"></textarea></div>
+                
+                
+                
+  
+
+
+        <section>
+           <!-- <article data-role="content" style="position: fixed;text-align: center;width: 100%;height: 100%;margin:0;padding:0;overflow: hidden;" >
+                <a id="go" href="#view-feed-custom"> <img style="max-width: 100%;" src="img/portada.jpg" alt="Logo"> </a>
+            </article>-->
+
+            <script>
+                
+                function send(){
+                    var args = {
+                        subject: document.getElementById("sub").value,
+                        body: document.getElementById("bod").value,
+                        toRecipients: localStorage.email
+                    };
+                    cordova.exec(null, null, "EmailComposer", "showEmailComposer", [args]);
+                    window.location.href="home.html"
+                }               
+                
+               
+                               </script>
+            
+
+            
+            <button onclick='send();'>Send Mail onClick</button>
+
+        </section>
+                
+            </div>
+            
+            
+            
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="themes/flatapp.css" />
+            <link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.2.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    <script type="text/javascript" src="jquery.mobile/jquery-1.9.1.js"></script>
+      <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.3.2.js"></script>
+        <script type="text/javascript" src="cordova.js"></script><link rel="stylesheet" type="text/css" href="css/activity.css"/>
+        <script type="text/javascript" src="js/activity-indicator.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                              
+                              $('.bg').css('background-image','url(' + localStorage.bgpath + ')');
+                              
+                              $('.hd').css('background-image','url(' + localStorage.hbg + ')');
+                              $('.hd').css('background-size','100%','100%');
+                              $('.hd').css('background-repeat','repeat-x');
+                              $('.hd').css('height','55px') ;
+                              $('.hd').css('text-align','center');
+                              $('.hd').css('color','#51C4D4');
+                              
+                              
+                              
+                              $('#info').append('<img src='+localStorage.info+' style="height: 25px; width: 25px; margin-left:90%; margin-top: -38px; margin-bottom: 30px"/>');
+                               $('#back').append('<img src='+localStorage.bk+' style="height: 35px; width: 55px; margin-right: 85%; margin-top: -40px; margin-bottom: 50px"/>');
+                              
+                              $('#info img').click(function(){
+                                                   window.location.href="index.html#contentPage";
+                                                   });
+                              
+                              $('#back img').click(function(){
+                                                   window.location.href="home.html";
+                                                   });
+                              
+                              $('#call').click(function(){
+                                                   window.location.href="live.html";
+                                                   });
+
+                              
+                              //$('.bg').css('background-image','url(' + bg + ')');
+                              
+                              });
+            
+            </script>
+        
+        <style>
+            img{
+                width: 100%;
+            }
+            div{
+                font-family: Helvetica,Arial,sans-serif;
+                font-weight: normal;
+                font-stretch: ultra-expanded;
+                text-shadow:none;
+            }
+            h2{
+                text-shadow:none;
+            }
+            p {text-transform:none;
+                font-size: 20px;}
+            </style>
+        
+    </head>
+    <body>
+        
+        <div data-role="page" id="textPage" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:999">
+                <h3><script>document.write(localStorage.head);</script></h3>
+                <div id="back"></div>
+                
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <h2 style="text-align:center;"><script>document.write(localStorage.Title);</script></h2>
+            
+            <div data-role="content">
+                
+                <div><script>document.write(localStorage.Text);</script></div>
+                
+                <button id="call">Click to view page</button>
+                
+                
+                
+            </div>
+                       
+            
+            
+        </div>
+        
+        
+    </body>
+</html>
+        
