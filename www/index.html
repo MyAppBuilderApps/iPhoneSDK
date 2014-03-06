@@ -1,196 +1,318 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.3.2.css" type="text/css">
-        <title>Hello World</title>
-    <script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
-      <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.3.2.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/activity.css"/>
-        <script type="text/javascript" src="js/activity-indicator.js"></script>
-        <script src="js/validatef.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/inline.css" />
-		
-		<script type="text/javascript"> 
-		function Check(val){
-		
-		localStorage.appkey1 = val;
-                               localStorage.appkey1 = document.getElementById("appkey").value.toLowerCase();
-                                                 $('#login').activity({segments: 8, width: 5, space: 12, length:15, color: 'black', speed: 2});
-                                                 
-                                                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {   
-                                                                          var url = "http://build.myappbuilder.com/api/apps/"+localStorage.appkey1;
-                                                                          var Path;
-                                                                          var a = "/Data.json";
-                                                                          Path = fs.root.fullPath +a;
-                                                                          var fileTransfer = new FileTransfer();
-                                                                          fileTransfer.download(url, Path, function (entry) {
-     $('#login').activity({segments: 8, width: 5, space: 12, length:15, color: 'black', speed: 2});
-                                                                                                localStorage.path=entry.fullPath;
-                                                                                                var contentText = $.ajax({
-                                                                                                                         
-                                                                                                                         url: localStorage.path,
-                                                                                                                         
-                                                                                                                         async: false
-                                                                                                                         
-                                                                                                                         }).responseText;
-                                                                                                
-                                                                                                
-                                                                                                var results = $.parseJSON(contentText);
-                                                                                                
-                                                                                                localStorage.head = results.title;
-                                                                                                
-                                                                                                localStorage.author = results.author;
-                                                                                                
-                                                                                                localStorage.about_author = results.about_author;
-                                                                                                
-                                                                                                localStorage.description = results.description;
-                                                                                                
-                                                                                                localStorage.copyright = results.copyright;
-                                                                                                
-                                                                                                localStorage.price = results.price;
-                                                                                                
-                                                                                                localStorage.bg = results.portrait_background;
-                                                                                                
-                                                                                                localStorage.update = results.updated_at;
-                                                                                                
-                                                                                                
-                                                                                                window.location.href="icons.html";
-                                                                                                
-                                                                                                }, function (error) {
-                                                                                    console.log("Some error");
-                                                                                     localStorage.clear();
-                                                                                     navigator.notification.alert("Invalid Key");
-                                                                                    
-                                                                                                });
-                                                                          
-                                                                          })
-                                                 }
-												 
-					 
-	
-		
-	 </script>	
-<style>
-    label {text-transform:none;
-        font-size: 20px;
-        text-shadow:none;}
-    </style>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" href="themes/flatapp.css" />
+        <link rel="stylesheet" href="themes/jquery.mobile.structure-1.3.2.css" />
 
-        
-       
+        <link rel="stylesheet" type="text/css" href="css/inline.css" />
+        <link rel="stylesheet" type="text/css" href="css/activity.css"/> 
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>   
+        <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     </head>
     <body>
-    
-    
-    <div data-role="page" id="home" data-theme="b" style="background-image:url('img/theme3/bg.png'); background-size:100% 100%; background-repeat:repeat-x;">
-           <br>
-      <script type="text/javascript">
-            $(document).ready(function() {
-               //$('#login').activity({segments: 8, width: 5, space: 12, length:15, color: 'black', speed: 2});              
-                               //alert(localStorage.appkey1);
-                              if(localStorage.appkey1== undefined){
-//                              window.location.href="#login";
-//                             }
-//                             else if(localStorage.appkey1== 0){
-//                             window.location.href="#login";
-                             
-                              var content = $.ajax({
-                                                       
-                                                       url: "key.txt",
-                                                       
-                                                       async: false
-                                                       
-                                                       }).responseText;
-                              
-                              
-                              var result = $.parseJSON(content);
-                              localStorage.appkey1=result.api_key;
-                              //alert(localStorage.appkey1);
-                              window.location.href="check.html";
-                             }
-                              else{
-							 
-                              window.location.href="check.html";
-                              }
-                              
-                              });
-            </script>
-        </div>
-        
-        <div data-role="page" id="login" data-theme="b" style="background-image:url('img/theme3/bg.png'); background-size:100% 100%; background-repeat:repeat-x;">
-           <br>
+       
+        <div data-role="page" id="login" data-theme="b" style="background-image:url('img/bg.png'); background-size:100% 100%; background-repeat:repeat-x;">
             <br>
             <br>
-
-            <form  action="javascript:generalsearchgo();" method="post" id="GenaralSearch">
+            <br>
+            <!-- <form  action="javascript:generalsearchgo();" method="post" id="GenaralSearch">
                 
                 <table border="0" cellspacing="5" width="100%">
                     
-                <tr>
-                    <td style="text-align:left">
-                        <label>APPKEY</label>
-                    </td>
+                    <tr>
+                        <td style="text-align:left">
+                            <label>APPKEY</label>
+                        </td>
                         <td style="text-align:right" >
-                        <input type="text" id="appkey" name="appkey" placeholder= "APPKEY" >
-                            </td>
-                </tr>
-                
-
+                            <input type="text" id="appkey" name="appkey" value="1d9a209c7c23847f32e3d35ebf8f6af6" placeholder= "APPKEY">
+                        </td>
+                    </tr>
+                    
+                    
                 </table>
                 <input type="submit" id="submit" value="Submit"/>
-            </form>
-            
-                
-                <script type="text/javascript">
-            
-                     function generalsearchgo(){                                     
-                     var a = document.getElementById("appkey").value.toLowerCase();
-                                                 //alert(a);
-                                                 localStorage.appkey1 = a;
-                                                
-                                                 //alert(localStorage.appkey1);
-                                                 if(localStorage.appkey1==""){
-                                                 localStorage.appkey1= 0;
-                                                 navigator.notification.alert("Enter Key");
-                                                 }
-                                                else if(localStorage.appkey1== undefined){
-                                                 navigator.notification.alert("Undefined Key");
-                                                 }
-                                                 else{
-                                                Check(localStorage.appkey1);
-                                                 }
-                             }
-            
-			            
-            </script>	
-            </div>
-       
+            </form>-->
+        </div>
         
-      
-       
-                                    </body>
-    
+        
+        
+        
+        <div data-role="page" id="icons" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:999">
+                <h4><span id ="title"> </span></h4>
+                <div id="info"><img src="img/btn_info.png" style="height: 35px; width: 35px; margin-left:85%; margin-top: -60px; margin-bottom: 45px"/></div>
+                <div id="clear"><img src="img/btn_clear.png" style="height: 35px; width: 35px; margin-right: 85%; margin-top: -80px; margin-bottom: 70px"/></div>
+            </div>
+            
+            <div data-role="content"  style="margin-top:20%">
+                <div class="ui-grid-a" id="linksList">
+                </div>
+            </div>
+        </div>
+        
 
+        <div data-role="page" id="information" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">       
+             <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:999">
+                <h4><span id="heading" ></span></h4>
+                <div id="back"><img src="img/btn_back.png" style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div data-role="content">
+                <div>
+                    <p style="text-align:justify; text-justify:inter-word;"><span id="description"></span><p>
+                </div>
+                
+                <p>
+                <b>Author : </b>
+                <p id="author"></p>
+                </p>
+                
+                <p>
+                <b>About_Author : </b>
+                <p id="about_author"></p>
+                </p>
+                
+                <p>
+                <b>Copyright : </b>
+                <p id="copyright"></p>
+                </p>
+                
+                <p>
+                <b>Price : </b>
+                <p id="price"></p>
+                </p>
+                
+            </div>
+        </div>  
+
+
+
+        <div data-role="page" id="rss" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:2000">
+                <h4><span id="rssheading"></span></h4>
+                <div id="rssback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <h2 style="text-align:center;"><span id="rsstitle"></span></h2>
+            
+            <div id="rssstatus"></div>
+            <ul id="rsslistview" data-role="listview" data-inset="true" style="z-index:0"></ul>
+            
+            <div data-role="content">
+                
+            </div>
+        </div>
+
+
+        <div data-role="page" id="rsscontentPage" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:999">
+                <h4><span id="rsscontentPageheading"></span></h4>
+                <div id="rsscontentPageback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            
+            <h2 id="rsscontentPageHeading1" style="text-align:center; margin-top:20%"></h2>
+            
+            <p id="rssentryText" style="text-align:justify; text-justify:inter-word;">
+            </p>
+            
+        </div>
+
+
+        <div data-role="page" id="video" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:1000">
+                <h4><span id="videoheading"></span></h4>
+                <div id="videoback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+                
+            </div>
+            <br>
+            <br>
+
+            <h2 style="text-align:center;"><span id="videoTitle"></span></h2>
+            
+            <div data-role="content">
+                
+                <div><span id="videoText"></span></div>
+                
+                <div id="videoppt"></div>
+               
+                <div id="videoplayer"></div>
+            </div>
+        </div>
+
+
+        <div data-role="page" id="audio" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:1000">
+                <h4><span id="audioheading"></span></h4>
+                <div id="audioback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+                
+            </div>
+            <br>
+            <br>
+
+            <h2 style="text-align:center;"><span id="audioTitle"></span></h2>
+            
+            <div data-role="content">
+                
+                <div><span id="audioText"></span></div>
+                
+                <div id="audioppt"></div>
+               
+                <div id="audioplayer"></div>
+            </div>
+        </div>
+
+
+        <div data-role="page" id="textcontent" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x; height: 100%;">
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:99">
+                <h4><span id="textcontentheading"></span></h4>
+                <div id="textcontentback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            <br />
+            <br />
+            <div data-role="content" style="text-align:center;">
+                  <h2><span id="textcontentTitle"></span></h2>
+                  <p id="textcontentText" style="text-align:justify; text-justify:inter-word;"></p>
+                  <b id="textcontentPrice"></b>
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div id="contentPre" ></div>
+                        <!--<a data-role="button" data-inline="true" data-theme="" data-icon="arrow-l" id="textcontentpre">PREV</a>-->
+                    </div>
+                    <div class="ui-block-b">
+                        <div id="contentNext" ></div>
+                        <!--<a data-role="button" data-inline="true" data-theme="" data-icon="arrow-r" id="textcontentnext">NEXT</a>-->
+                    </div>
+                </div>
+            </div>
+                  
+               
+        </div>
+
+
+        
+        <div data-role="page" id="text" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x; height: 100%;">
+            
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:99">
+                <h4><span id="textheading"></span></h4>
+                <div id="textback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            <div>
+               <br>
+               <br>    
+                <div data-role="content" style="text-align:center;">
+                  <h2><span id="textTitle"></span></h2>
+                  
+                </div>
+                <ul id="textListview" data-role="listview" data-inset="true"></ul>
+            </div>
+        </div>
+
+
+         <div data-role="page" id="contact_form" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; height:auto; z-index:999">
+                <h4><span id="contactheading"></span></h4>
+                <div id="contactback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+                
+            </div>
+            <br>
+            <br>
+            
+           
+
+            <h3 style="text-align:center;"><span id="contactTitle"></span></h3>
+            
+            <div data-role="content">
+                <div><input type="text" id="contactsubject" placeholder="Subject"></div>
+                <div><textarea style="resize:vertical; max-height:200px; min-height:200px; " type="text" id="contactbody" placeholder="message to suggest you" ></textarea></div>
+                <div align="right"><a data-role="button" data-inline="true" data-theme="" id="sendMail" >Send Mail</a></div>
+            </div>
+        </div>
+
+        
+
+        <div data-role="page" id="web_page" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+            <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:99">
+                <h4><span id="web_pageheading"></span></h4>
+                <div id="web_pageback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            <div>
+               <br>
+               <br>    
+                <div data-role="content" style="text-align:center;">
+                  <h2><span id="web_pageTitle"></span></h2>
+                  
+                </div>
+                <p id="web_pageText" style="text-align:justify; text-justify:inter-word;" ></p>
+                <fant color="blue"><a id="web_pageurl" href=""></a></font>
+            </div>
+        </div>
+
+
+
+        <div id="map" data-role="page" class="bg" data-theme="a" style="background-size:100% 100%; background-repeat:repeat-x;">
+             <div data-role="header-fixed" class="hd" style="position:fixed; width:100%; z-index:99">
+                <h4><span id="mapheading">map</span></h4>
+                <div id="mapback"><img src='img/btn_back.png' style="height: 35px; width: 55px; margin-right: 90%; margin-top: -55px; margin-bottom: 50px"/></div>
+            </div>
+            <div data-role="content">    
+            
+                <div id="panel" style="margin-top:5%; margin-left:2%;">
+                    <div id="map-canvas" style="width:100%; height:300px; margin-top: 20%"></div><br />
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <input id="mapaddress" type="text" value="" >
+                        </div>
+                        <div class="ui-block-b">
+                            <a data-role="button" data-inline="true" data-theme="" id="mapButton" style="height:35px">Location</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+        <script>
+			$(document).bind("mobileinit", function(){
+                $.mobile.defaultDialogTransition = "none";
+                $.mobile.defaultPageTransition = "none";
+                $.mobile.ajaxEnabled =false;
+            });
+        </script>
+        <script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/activity-indicator.js"></script>
+        <script type="text/javascript" src="js/EmailComposer.js"></script>
+        <script type="text/javascript" src="js/CDVVideo.js"></script>
+        <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script type="text/javascript">
+            var geocoder;
+            var map;
+                function initialize() {
+                    geocoder = new google.maps.Geocoder();
+                    var latlng = new google.maps.LatLng(-34.397, 150.644);
+                    var mapOptions = {
+                        zoom: 8,
+                        center: latlng,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                }
+                google.maps.event.addDomListener(window, 'load', initialize);
+        </script>   
+    </body>
 </html>

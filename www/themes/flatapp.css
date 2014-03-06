@@ -14,12 +14,17 @@
 /* A
 -----------------------------------------------------------------------------------------------------------*/
 .ui-bar-a {
-	 /*border: 1px solid #F4F4F4 /*{a-bar-border}*/;
+	border: 1px solid #F4F4F4 /*{a-bar-border}*/;
 	background: #FAFAFA /*{a-bar-background-color}*/;
 	color: #7CD0DC /*{a-bar-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #ffffff /*{a-bar-shadow-color}*/;
-	
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #FEFEFE /*{a-bar-background-start}*/), to( #FCFCFC /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #FEFEFE /*{a-bar-background-start}*/, #FCFCFC /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #FEFEFE /*{a-bar-background-start}*/, #FCFCFC /*{a-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #FEFEFE /*{a-bar-background-start}*/, #FCFCFC /*{a-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #FEFEFE /*{a-bar-background-start}*/, #FCFCFC /*{a-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #FEFEFE /*{a-bar-background-start}*/, #FCFCFC /*{a-bar-background-end}*/);
 }
 .ui-bar-a .ui-link-inherit {
 	color: #7CD0DC /*{a-bar-color}*/;
@@ -47,8 +52,8 @@
 .ui-body-a,
 .ui-overlay-a {
 	border: 1px solid #B7C6CC /*{a-body-border}*/;
-	color: #F9FAFC /*{a-body-color}*/;
-	text-shadow: 0 /*{a-body-shadow-x}*/ .5px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #F9FAFC /*{a-body-shadow-color}*/;
+	color: #000000 /*{a-body-color}*/;
+	text-shadow: 0 /*{a-body-shadow-x}*/ .5px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #000000 /*{a-body-shadow-color}*/;
 	background: #51C4D4 /*{a-body-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #51c4d4 /*{a-body-background-start}*/), to( #51c4d4 /*{a-body-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #51c4d4 /*{a-body-background-start}*/, #51c4d4 /*{a-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -69,7 +74,7 @@
 	    font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-a .ui-link-inherit {
-	color: #F9FAFC /*{a-body-color}*/;
+	color: #000000 /*{a-body-color}*/;
 }
 .ui-body-a .ui-link {
 	color: #3E4D5A /*{a-body-link-color}*/;
@@ -79,10 +84,10 @@
     color: #3E4D5A /*{a-body-link-visited}*/;
 }
 .ui-body-a .ui-link:hover {
-	color: #F9FAFC /*{a-body-link-hover}*/;
+	color: #000000 /*{a-body-link-hover}*/;
 }
 .ui-body-a .ui-link:active {
-	color: #F9FAFC /*{a-body-link-active}*/;
+	color: #000000 /*{a-body-link-active}*/;
 }
 .ui-btn-up-a {
 	border: 1px solid #E1D5D1 /*{a-bup-border}*/;
